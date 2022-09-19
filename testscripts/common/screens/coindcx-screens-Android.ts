@@ -25,7 +25,11 @@ export class CoinDCXHomeScreenAPK extends  CoinDCXElementAPK {
     static  homeScreenMsgAPK () { return this.Element('android=new UiSelector().description("Unlock your true trading potential")') };
     static  myAccTab () { return this.Element('android=new UiSelector().description("Account")') };
     // static  skipBtnAPK1 () { return this.Element('android=new UiSelector().description ("Skip")') };
-    static  loginWithEmaillink () { return this.Element('~Log In with Email') };
+    static  loginLink () { return this.Element('~Login') };
+    static  loginWithEmailLink () { return this.Element('~Log In with Email') };
+    static  emailTextBox () { return this.Element('android=new UiSelector().textContains("Email Address")') };
+    static  passTextBox () { return this.Element('android=new UiSelector().textContains("Password")') };
+    static  loginBtn () { return this.Element('(//android.view.View[@content-desc="Login"])[2]') };
    
    
 
@@ -39,7 +43,14 @@ export class CoinDCXHomeScreenAPK extends  CoinDCXElementAPK {
     }
 
     static async loginIntoCoindDCX(){
-        await this.loginWithEmaillink().click();
+        await this.loginLink().click();
+        await this.loginWithEmailLink().click();
+        await this.emailTextBox().addValue('Srinivas.Madnal@gmail.com');
+        await this.passTextBox().click();
+        await this.passTextBox().addValue('Cinthol231');
+        await driver.pause(3000);
+        await this.loginBtn().click();
+       
     }
  
 }
@@ -182,7 +193,36 @@ export class CoinDCXAccountScreenAPK extends  CoinDCXHomeScreenAPK{
 
 
 
+export class RamdomAPKAutoamtion extends  CoinDCXElementAPK {
+ 
+    static  osBtn () { return this.Element('~Preference') };
+    static  smsBtn () { return this.Element('~SMS Messaging') };
+    static  recipientTextBox () { return this.Element('android=new UiSelector().resourceId("io.appium.android.apis:id/sms_recipient")') };
+    static  messageTextBox () { return this.Element('android=new UiSelector().resourceId("io.appium.android.apis:id/sms_content")') };
+    static  sendSmsBtn () { return this.Element('~Send') };
+    static  coinDCXMgs () { return this.Element('android=new UiSelector().textContains("Team DCX")') };
+    static  fetchsmsEle () { return this.Element('android=new UiSelector().textContains("Your OTP to log in to your account is")') };
+    
 
+    static async sendOTP(){
+        await driver.startActivity("io.appium.android.apis","io.appium.android.apis.os.SmsMessagingDemo")
+        await this.recipientTextBox().addValue('8553333850');
+        await this.messageTextBox().addValue('Your OTP is 989765, and is valid for 5 mins');
+        await this.sendSmsBtn().click();
+        
+    }
+
+    static async fetchOTP(){
+        await driver.openNotifications();
+        await driver.pause(4000)
+        // await driver.startActivity("com.samsung.android.messaging","com.samsung.android.messaging.com.android.mms.ui.ConversationComposer");
+        await this.coinDCXMgs().click();
+        let smsContent = await this.fetchsmsEle().getVisibleText();
+        console.log(await smsContent);
+    }
+    
+   
+}
 
 
 

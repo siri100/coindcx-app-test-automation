@@ -1,19 +1,24 @@
-import {CoinDCXAccountScreenAPK, CoinDCXHomeScreenAPK} from  '../common/screens/coindcx-screens-Android';
+import {CoinDCXAccountScreenAPK, CoinDCXHomeScreenAPK, RamdomAPKAutoamtion} from  '../common/screens/coindcx-screens-Android';
 import  * as commonData from "../common/support/testdata.json";
 import { assert ,expect} from 'chai';
 
 
 describe('CoinDCX Test Suite : ', () => {
    
-    // before('Verify CoinDCX HomePage', async function () {
-    //     // const homeScreenMsg = await CoinDCXHomeScreenAPK.VerifyHomePage();
-    //     // expect(homeScreenMsg).to.be.equal('Unlock your true trading potential');
-    // });
-  
+    before('Verify CoinDCX HomePage', async function () {
+        const homeScreenMsg = await CoinDCXHomeScreenAPK.VerifyHomePage();
+        expect(homeScreenMsg).to.be.equal('Unlock your true trading potential');
+        await CoinDCXHomeScreenAPK.loginIntoCoindDCX();
+    });
+    it('OTP validation', async () => {
+
+       await RamdomAPKAutoamtion.fetchOTP();
+       
+    });
     xit('Verify CoinDCX About Section Content', async () => {
         let myAccTabMsg = await CoinDCXAccountScreenAPK.navigateToAccTab();
         expect(myAccTabMsg).to.be.contains('Welcome to CoinDCX Pro');
-        expect(await CoinDCXAccountScreenAPK.scrollIntoAboutUs()).to.be.contains('About Us\nv2.05.053');
+        expect(await CoinDCXAccountScreenAPK.scrollIntoAboutUs()).to.be.contains('About Us\nv');
         const aboutUSContent = await CoinDCXAccountScreenAPK.getAboutUsContent();
         expect(aboutUSContent).to.have.ordered.members( [
                'About CoinDCX',
@@ -30,7 +35,7 @@ describe('CoinDCX Test Suite : ', () => {
         expect(intoMurl).to.be.contains('support.coindcx.com')
 
     })
-    it('health-espresso login Scenario' , async ()=>{
+    xit('health-espresso login Scenario' , async ()=>{
        let loginScreenMsg = await CoinDCXAccountScreenAPK.navigateToLoginScreen()
        expect(loginScreenMsg).to.be.contains('Welcome back!\nSign in to view your account.');
        await CoinDCXAccountScreenAPK.login(commonData.emailID,commonData.password);
@@ -47,7 +52,7 @@ describe('CoinDCX Test Suite : ', () => {
         let HeartRateReadingUI:number = await CoinDCXAccountScreenAPK.fecthHR();
         expect(HeartRateReadingUI).to.equal(commonData.HeartRate)
      })
-     it('health-espresso Add-Blood-Pressure Scenario' , async ()=>{
+     xit('health-espresso Add-Blood-Pressure Scenario' , async ()=>{
         let HomeScreenMsg = await CoinDCXAccountScreenAPK.startHomeScreen();
         expect(HomeScreenMsg).to.be.equal('Hello, Test!');
         let quickAddMenuMgs = await CoinDCXAccountScreenAPK.navigateToQuickAddMenu();

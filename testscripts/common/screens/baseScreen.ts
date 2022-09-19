@@ -28,8 +28,14 @@ export  class BasePage {
     async waitForDisplayed(){
         return await (await this.UIElement).waitForDisplayed();
     }
+    async waitForEnabled(){
+        return await (await this.UIElement).waitForEnabled();
+    }
     async isEnabled(){
         return await (await this.UIElement).isEnabled();
+    }
+    async clearValue(){
+        return await (await this.UIElement).clearValue();
     }
     
     

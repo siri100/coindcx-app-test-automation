@@ -17,9 +17,9 @@ exports.config = {
     "automationName": "UIAutomator2",
     "udid": "RZ8R220H1EY",
     "platformVersion": "12.0",
-    "app": "C:\\app-release-universal.apk",
-    // "unicodeKeyboard" : 'true',
-    // "resetKeyboard" : 'true'
+    "app": "C:\\coindcxPro.apk",
+    "unicodeKeyboard" : 'true',
+    "resetKeyboard" : 'true'
       
   }],
   logLevel: 'info',
