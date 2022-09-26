@@ -50,7 +50,6 @@ export class CoinDCXHomeScreenAPK extends  CoinDCXElementAPK {
         await this.passTextBox().addValue('Cinthol231');
         await driver.pause(3000);
         await this.loginBtn().click();
-       
     }
  
 }
@@ -212,13 +211,18 @@ export class RamdomAPKAutoamtion extends  CoinDCXElementAPK {
         
     }
 
-    static async fetchOTP(){
-        await driver.openNotifications();
-        await driver.pause(4000)
-        // await driver.startActivity("com.samsung.android.messaging","com.samsung.android.messaging.com.android.mms.ui.ConversationComposer");
+    static async fetchsmsOTP(){
+        await driver.startActivity("com.samsung.android.messaging","com.android.mms.ui.ConversationComposer");
         await this.coinDCXMgs().click();
         let smsContent = await this.fetchsmsEle().getVisibleText();
-        console.log(await smsContent);
+       return Number(smsContent.split('is')[1].split('Do')[0].split('.')[0].trim());
+    }
+    static async fetchOTPfromNotf(){
+        await driver.pause(5000)
+        await driver.openNotifications();
+        let smsContent = await this.fetchsmsEle().getVisibleText();
+       return Number(smsContent.split('is')[1].split('Do')[0].split('.')[0].trim());
+
     }
     
    

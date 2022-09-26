@@ -8,11 +8,12 @@ describe('CoinDCX Test Suite : ', () => {
     before('Verify CoinDCX HomePage', async function () {
         const homeScreenMsg = await CoinDCXHomeScreenAPK.VerifyHomePage();
         expect(homeScreenMsg).to.be.equal('Unlock your true trading potential');
-        await CoinDCXHomeScreenAPK.loginIntoCoindDCX();
+        
     });
-    it('OTP validation', async () => {
-
-       await RamdomAPKAutoamtion.fetchOTP();
+    it('Verify login funtionality COINDCX', async () => {
+       await CoinDCXHomeScreenAPK.loginIntoCoindDCX();
+       let smsOTP = await RamdomAPKAutoamtion.fetchOTPfromNotf();
+       console.log(smsOTP);
        
     });
     xit('Verify CoinDCX About Section Content', async () => {
