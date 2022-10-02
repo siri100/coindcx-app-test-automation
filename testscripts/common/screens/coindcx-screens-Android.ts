@@ -35,9 +35,12 @@ export class CoinDCXHomeScreenAPK extends  CoinDCXElementAPK {
 
    
     static async VerifyHomePage () {
+        await browser.startRecordingScreen();
         
         await this.skipBtnAPK().click();
         await this.skipForNowBtnAPK().click();
+        await browser.saveScreenshot("browserfull.png")
+        await browser.saveRecordingScreen('video.mp4');
         return await this.homeScreenMsgAPK().getAttribute('content-desc');
     
     }

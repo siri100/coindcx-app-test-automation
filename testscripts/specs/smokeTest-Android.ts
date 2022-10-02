@@ -10,7 +10,7 @@ describe('CoinDCX Test Suite : ', () => {
         expect(homeScreenMsg).to.be.equal('Unlock your true trading potential');
         
     });
-    it('Verify login funtionality COINDCX', async () => {
+    xit('Verify login funtionality COINDCX', async () => {
        await CoinDCXHomeScreenAPK.loginIntoCoindDCX();
        let smsOTP = await RamdomAPKAutoamtion.fetchOTPfromNotf();
        console.log(smsOTP);
@@ -36,6 +36,12 @@ describe('CoinDCX Test Suite : ', () => {
         expect(intoMurl).to.be.contains('support.coindcx.com')
 
     })
+
+    it('CoinDCX Validate PDF Scenario' , async ()=>{
+      console.log('Dummy');
+    })
+
+
     xit('health-espresso login Scenario' , async ()=>{
        let loginScreenMsg = await CoinDCXAccountScreenAPK.navigateToLoginScreen()
        expect(loginScreenMsg).to.be.contains('Welcome back!\nSign in to view your account.');
@@ -62,6 +68,7 @@ describe('CoinDCX Test Suite : ', () => {
         const BPReadingUI = await CoinDCXAccountScreenAPK.fetchBP();
         expect(BPReadingUI).to.equal(`${120}/${80}`)
      })
+    
 });
 
 
